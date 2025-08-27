@@ -5,7 +5,7 @@ import com.exemplo.model.Position;
 import com.exemplo.model.Piece;
 import com.exemplo.model.Rook;
 import com.exemplo.ui.GridLayoutDemo;
- 
+    
  public class Game {
     private Board board;
     private boolean isWhiteTurn;
