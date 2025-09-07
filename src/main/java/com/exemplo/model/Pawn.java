@@ -21,9 +21,11 @@ public class Pawn extends Piece {
 
             // Movimento de dois passos na primeira jogada
             Position twoStepsForward = new Position(position.getRow() + 2 * direction, position.getColumn());
-            if (position.getRow() == startRow && board.getPieceAt(twoStepsForward) == null) {
-                moves.add(twoStepsForward);
-            }
+            if (position.getRow() == startRow 
+            && board.getPieceAt(oneStepForward) == null 
+            && board.getPieceAt(twoStepsForward) == null) {
+            moves.add(twoStepsForward);
+}
         }
 
         // Capturas diagonais
@@ -40,9 +42,10 @@ public class Pawn extends Piece {
 
         return moves;
     }
-
+    //peão
     @Override
-    public String getSymbol() {
-        return "P";
+    public String getSymbol() { 
+        return isWhite ? "♙" : "♟";
+
     }
 }

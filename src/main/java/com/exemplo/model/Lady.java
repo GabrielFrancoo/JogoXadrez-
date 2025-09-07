@@ -19,7 +19,7 @@ public class Lady extends Piece{
             
             while (true) {
                 row += direction[0];
-                col += direction[4];
+                col += direction[1];
                 Position newPos = new Position(row, col);
                 
                 if (!newPos.isValido()) break;
@@ -40,10 +40,9 @@ public class Lady extends Piece{
         }
             return moves;
     }
-
+    //rainha    
     @Override
     public String getSymbol() {
-        return "Q";
-    }
-    
+        return isWhite ? "♕" : "♛";
+    }    
 }

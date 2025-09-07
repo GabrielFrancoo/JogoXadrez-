@@ -1,4 +1,4 @@
-package com.exemplo.ui;
+package com.exemplo.vew;
 import com.exemplo.model.Bishop;
 import com.exemplo.model.Board;
 import com.exemplo.model.Horse;
@@ -57,25 +57,25 @@ public class GridLayoutDemo {
         board.placePiece(new King(board, true), new Position(7, 4));
         board.placePiece(new King(board, false), new Position(0, 4));
 
-        // Peões pretos (fileira 6)
-        board.placePiece(new Pawn(board, false),new Position(6, 0));
-        board.placePiece(new Pawn(board, false),new Position(6, 1));
-        board.placePiece(new Pawn(board, false),new Position(6, 2));
-        board.placePiece(new Pawn(board, false),new Position(6, 3));
-        board.placePiece(new Pawn(board, false),new Position(6, 4));
-        board.placePiece(new Pawn(board, false),new Position(6, 5));
-        board.placePiece(new Pawn(board, false),new Position(6, 6));    
-        board.placePiece(new Pawn(board, false),new Position(6, 7));
+        // Peões pretos (fileira 1)
+        board.placePiece(new Pawn(board, false),new Position(1, 0));
+        board.placePiece(new Pawn(board, false),new Position(1, 1));
+        board.placePiece(new Pawn(board, false),new Position(1, 2));
+        board.placePiece(new Pawn(board, false),new Position(1, 3));
+        board.placePiece(new Pawn(board, false),new Position(1, 4));
+        board.placePiece(new Pawn(board, false),new Position(1, 5));
+        board.placePiece(new Pawn(board, false),new Position(1, 6));    
+        board.placePiece(new Pawn(board, false),new Position(1, 7));
 
-        // Peões brancos (fileira 1)
-        board.placePiece(new Pawn(board, true),new Position(1, 0));
-        board.placePiece(new Pawn(board, true),new Position(1, 1));
-        board.placePiece(new Pawn(board, true),new Position(1, 2));
-        board.placePiece(new Pawn(board, true),new Position(1, 3));
-        board.placePiece(new Pawn(board, true),new Position(1, 4));
-        board.placePiece(new Pawn(board, true),new Position(1, 5));
-        board.placePiece(new Pawn(board, true),new Position(1, 6));
-        board.placePiece(new Pawn(board, true),new Position(1, 7));
+        // Peões brancos (fileira 6)
+        board.placePiece(new Pawn(board, true),new Position(6, 0));
+        board.placePiece(new Pawn(board, true),new Position(6, 1));
+        board.placePiece(new Pawn(board, true),new Position(6, 2));
+        board.placePiece(new Pawn(board, true),new Position(6, 3));
+        board.placePiece(new Pawn(board, true),new Position(6, 4));
+        board.placePiece(new Pawn(board, true),new Position(6, 5));
+        board.placePiece(new Pawn(board, true),new Position(6, 6));
+        board.placePiece(new Pawn(board, true),new Position(6, 7));
     }
     
     private void createAndShowGUI() {

@@ -18,7 +18,7 @@ public class Bishop extends Piece {
             
             while (true) {
                 row += direction[0];
-                col += direction[3];
+                col += direction[1];
                 Position newPos = new Position(row, col);
                 
                 if (!newPos.isValido()) break;
@@ -39,8 +39,9 @@ public class Bishop extends Piece {
         }
             return moves;
     }
+    //bispo
     @Override
     public String getSymbol() {
-        return "B";
+        return isWhite ? "♗" : "♝";
     }
 }
