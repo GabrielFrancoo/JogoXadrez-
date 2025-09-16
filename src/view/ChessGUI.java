@@ -21,7 +21,7 @@ public class ChessGUI extends JFrame {
     private static final long serialVersionUID = 1L; // evita warning de serialização
 
     // --- Config de cores/styles ---
-    //branco
+//======================ALTERAÇÃO COR DO TABULEIRO==============================
     private static final Color LIGHT_SQ = new Color(240, 217, 181); // Bege claro
     private static final Color DARK_SQ  = new Color(128, 128, 128); // Cinza
     private static final Color HILITE_SELECTED = new Color(50, 120, 220);
@@ -39,8 +39,8 @@ public class ChessGUI extends JFrame {
     private final JButton[][] squares = new JButton[8][8];
 
     private final JLabel status;
-    private final JLabel whiteTimeLabel;
-    private final JLabel blackTimeLabel;
+    private final JLabel whiteTimeLabel; //tempo branco
+    private final JLabel blackTimeLabel; //tempo preto
     private final JTextPane history;
     private final JScrollPane historyScroll;
         
@@ -70,9 +70,9 @@ public class ChessGUI extends JFrame {
 
     public ChessGUI() {
         super("ChessGame");
-
-        whiteCapturedPanel = new CapturedPiecesPanel();
-        blackCapturedPanel = new CapturedPiecesPanel();
+        // Criação dos painéis que vão mostrar as peças capturadas de cada lado
+        whiteCapturedPanel = new CapturedPiecesPanel();// Painel para peças capturadas das brancas
+        blackCapturedPanel = new CapturedPiecesPanel();// Painel para peças capturadas das pretas
         // Look&Feel Nimbus
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -115,33 +115,37 @@ public class ChessGUI extends JFrame {
         status = new JLabel("Vez: Brancas");
         status.setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
         
-        // Timer labels
+//======================TEMPO DEFINIDO========================
         whiteTimeLabel = new JLabel("Brancas: 00:00");
         blackTimeLabel = new JLabel("Pretas: 00:00");
         whiteTimeLabel.setFont(whiteTimeLabel.getFont().deriveFont(Font.BOLD, 14f));
         blackTimeLabel.setFont(blackTimeLabel.getFont().deriveFont(Font.BOLD, 14f));
         whiteTimeLabel.setForeground(Color.BLUE);
         blackTimeLabel.setForeground(Color.RED);
-
+        
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         leftPanel.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
-       //Painel de peças capturadas
+
+        // Criação do painel lateral que agrupa os painéis de peças capturadas
        JPanel capturedPanel = new JPanel();
-       capturedPanel.setLayout(new BoxLayout(capturedPanel, BoxLayout.Y_AXIS));
-       capturedPanel.setBorder(BorderFactory.createTitledBorder("Capturadas"));
+       capturedPanel.setLayout(new BoxLayout(capturedPanel, BoxLayout.Y_AXIS));// Empilha verticalmente
+       capturedPanel.setBorder(BorderFactory.createTitledBorder("Capturadas"));// Título do painel
        
+       // Alinhamento dos painéis
        whiteCapturedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
        blackCapturedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
        whiteCapturedPanel.setMaximumSize((new Dimension(Integer.MAX_VALUE, whiteCapturedPanel.getPreferredSize().height)));
        blackCapturedPanel.setMaximumSize((new Dimension(Integer.MAX_VALUE, whiteCapturedPanel.getPreferredSize().height)));
       
-       capturedPanel.add(whiteCapturedPanel);
+       // Adiciona os painéis ao painel principal de capturas
+       capturedPanel.add(whiteCapturedPanel);// Adiciona painel das brancas
        capturedPanel.add(Box.createVerticalStrut(10)); // Espaço entre os painéis
-       capturedPanel.add(blackCapturedPanel);
+       capturedPanel.add(blackCapturedPanel);// Adiciona painel das pretas
        
        capturedPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+       // Adiciona o painel de capturas ao painel lateral esquerdo da janela principal
        leftPanel.add(capturedPanel);
         
         // Histórico
@@ -213,18 +217,19 @@ public class ChessGUI extends JFrame {
         undoItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
         undoItem.addActionListener(e -> doUndo());
 
+//========================CAIXA MARCAÇÃO IA=====================
         pcAsWhite = new JCheckBoxMenuItem("PC joga com as Brancas");
         pcAsWhite.setSelected(false);
 
         pcAsBlack = new JCheckBoxMenuItem("PC joga com as Pretas");
         pcAsBlack.setSelected(false);
-
+//=======================PROFUNDIDADE DA IA===============================
         JMenu depthMenu = new JMenu("Profundidade IA");
-        whiteDepSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 4, 1));
+        whiteDepSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 4, 1));// Profundidade IA Brancas
         whiteDepSpinner.setToolTipText("Profundidade da IA para as Brancas (1-4)");
         depthMenu.add(whiteDepSpinner);
 
-        blackDepSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 4, 1));
+        blackDepSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 4, 1));// Profundidade IA Pretas
         blackDepSpinner.setToolTipText("Profundidade da IA para as Pretas (1-4)");
         depthMenu.add(blackDepSpinner);
 
@@ -247,7 +252,7 @@ public class ChessGUI extends JFrame {
 
     private JPanel buildSideControls() {
         JPanel panel = new JPanel(new GridLayout(3,2,10,5));
-
+//=============================== CAIXA DE MARCAÇÃO DAS IAS ====================
         JCheckBox cb = new JCheckBox("PC (Pretas)");
         cb.setSelected(pcAsBlack.isSelected());
         cb.addActionListener(e -> pcAsBlack.setSelected(cb.isSelected()));
@@ -419,12 +424,12 @@ private void maybeTriggerAI() {
 
     aiThinking = true;
     status.setText("Vez: " + (game.whiteToMove() ? "Brancas" : "Pretas") + " — PC pensando...");
-    
-    int depth;
+    //QUÃO PROFUNDO A IA
+    int depth;// Variável que define o nível (profundidade) da IA
         if (game.whiteToMove()){
-            depth = (Integer) whiteDepSpinner.getValue();
+            depth = (Integer) whiteDepSpinner.getValue();// Pega o valor do spinner das brancas
         } else {
-            depth = (Integer) blackDepSpinner.getValue();
+            depth = (Integer) blackDepSpinner.getValue();// Pega o valor do spinner das pretas
 
         }
     
@@ -525,7 +530,7 @@ private void maybeTriggerAI() {
                     lastTo = aiTo;
                 }
                 try{
-                    Thread.sleep(1);
+                    Thread.sleep(500);
                 }catch (InterruptedException ignored) {}
 
                 aiThinking = false;
@@ -648,12 +653,12 @@ private void maybeTriggerAI() {
         StyledDocument doc = history.getStyledDocument();
         
         // Estilos para cores
-        javax.swing.text.Style whiteStyle = history.addStyle("white", null);
-        javax.swing.text.StyleConstants.setForeground(whiteStyle, Color.BLUE);
+        javax.swing.text.Style whiteStyle = history.addStyle("Azul", null);
+        javax.swing.text.StyleConstants.setForeground(whiteStyle, Color.BLUE);// AZUL
         javax.swing.text.StyleConstants.setBold(whiteStyle, true);
-        
-        javax.swing.text.Style blackStyle = history.addStyle("black", null);
-        javax.swing.text.StyleConstants.setForeground(blackStyle, Color.RED);
+//===========================COR HISTÓRICO=====================================
+        javax.swing.text.Style blackStyle = history.addStyle("Vermelho", null);
+        javax.swing.text.StyleConstants.setForeground(blackStyle, Color.RED);// VERMELHO
         javax.swing.text.StyleConstants.setBold(blackStyle, true);
         
         javax.swing.text.Style numberStyle = history.addStyle("number", null);
@@ -725,7 +730,7 @@ private void maybeTriggerAI() {
         return Math.max(24, side - 8);
     }
 
-    // ----------------- Timer methods -----------------
+    // ===================TAMER JOGADA========================
     
     private void startGameTimer() {
         if (gameTimer != null) {
@@ -735,28 +740,31 @@ private void maybeTriggerAI() {
         gameTimer = new Timer(1000, e -> updateTimerDisplay()); // Update every second
         gameTimer.start();
     }
-    
+//===================TEMPO A CADA SEGUNDO=====================
+    // Se o jogo acabou, para o timer e retorna
     private void updateTimerDisplay() {
         if (game.isGameOver()) {
             gameTimer.stop();
             return;
         }
-        
-        long whiteTime = game.getCurrentPlayerTime();
-        long blackTime = game.getInactivePlayerTime();
-        
+       // Obtém o tempo dos jogadores
+        long whiteTime = game.getCurrentPlayerTime(); // Tempo do jogador da vez
+        long blackTime = game.getInactivePlayerTime();// Tempo do jogador que não está jogando
+
+        // Ajusta os tempos conforme o turno
         if (game.whiteToMove()) {
-            whiteTime = game.getCurrentPlayerTime();
-            blackTime = game.getInactivePlayerTime();
+            whiteTime = game.getCurrentPlayerTime();// Brancas estão jogando
+            blackTime = game.getInactivePlayerTime();// Pretas aguardam
         } else {
-            whiteTime = game.getInactivePlayerTime();
-            blackTime = game.getCurrentPlayerTime();
+            whiteTime = game.getInactivePlayerTime();// Brancas aguardam
+            blackTime = game.getCurrentPlayerTime();// Pretas estão jogando
         }
-        
+
+        // Atualiza os labels de tempo na interface
         whiteTimeLabel.setText("Brancas: " + game.formatTime(whiteTime));
         blackTimeLabel.setText("Pretas: " + game.formatTime(blackTime));
         
-        // Highlight current player's timer
+        // Destaca o tempo do jogador da vez (negrito e tamanho maior)
         if (game.whiteToMove()) {
             whiteTimeLabel.setFont(whiteTimeLabel.getFont().deriveFont(Font.BOLD, 16f));
             blackTimeLabel.setFont(blackTimeLabel.getFont().deriveFont(Font.PLAIN, 14f));
@@ -766,7 +774,7 @@ private void maybeTriggerAI() {
         }
     }
 //------------------ AI Timer -----------------
-    private void startAITimer() {
+    private void startAITimer() { 
     Timer aiTimer = new Timer(500, e -> {
         if (!aiThinking && !game.isGameOver()) {
             // Só dispara se for vez de uma IA marcada

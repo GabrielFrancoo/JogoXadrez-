@@ -1,61 +1,104 @@
-Para executar, cole no terminal:
+ChessGUI – Jogo de Xadrez com IA
 
-Remove-Item -Recurse -Force .\out -ErrorAction SilentlyContinue New-Item -ItemType Directory -Force .\out | Out-Null $files = Get-ChildItem -Recurse -Path .\src -Filter *.java | ForEach-Object FullName javac -Xlint:all -encoding UTF-8 -d out $files java -cp "out;resources" view.ChessGUI
+Autor: Gabriel Ozório Franco
 
+Descrição:
+ChessGUI é um jogo de xadrez desenvolvido em Java Swing, com inteligência artificial que pode jogar como Brancas, Pretas ou contra si mesma. O projeto possui interface gráfica completa, painel de peças capturadas, histórico de lances, controle de tempo e níveis de dificuldade ajustáveis.
 
-📋 Resumo Completo das Implementações:
+## Funcionalidades
 
-1. ⏰ Sistema de Timer (Primeira implementação)
-O que foi feito:
-✅ Adicionei campos de tempo no Game.java
-✅ Implementei cronômetro que conta tempo de cada jogador
-✅ Criei display visual no topo da tela
-✅ Timer atualiza a cada segundo em tempo real
+🎮 Jogar contra a IA ou entre humanos.
 
-Resultado:
-2. �� Cores do Tabuleiro
-O que foi feito:
-✅ Mudei de marrom para branco e cinza
-✅ Visual mais limpo e moderno
-Antes: Marrom claro/escuro
-Depois: Branco/Cinza
+🤖 IA configurável para jogar como Brancas, Pretas ou ambos os lados.
 
-3. 🌈 Histórico com Cores por Jogador
+🕹️ **Seleção de nível de dificuldade da IA (1 a 4):**
+- O usuário pode escolher o nível de profundidade da IA para cada lado, tornando o jogo mais fácil ou desafiador.
 
-O que foi feito:
-✅ Mudei JTextArea para JTextPane (suporta cores)
-✅ Brancas em azul e negrito
-✅ Pretas em vermelho e negrito
-✅ Números em preto e negrito
+🖼️ **Painel lateral de peças capturadas:**
+- As peças capturadas por cada lado são exibidas em painéis laterais, facilitando o acompanhamento do material.
 
-Resultado:
+⏱️ **Timer por jogador, com destaque para o jogador da vez:**
+- Cada jogador possui um cronômetro individual. O tempo do jogador da vez aparece destacado em vermelho para facilitar a visualização.
 
-4. ↩️ Sistema de Desfazer Movimento
-O que foi feito:
-✅ Classe GameState para salvar estados
-✅ Botão "Desfazer" no menu
-✅ Atalho Ctrl+Z
-✅ Restaura timer, tabuleiro e histórico
-✅ Botão inteligente (desabilitado quando não pode desfazer)
+🎨 **Mudança de cores das casas do tabuleiro:**
+- O tabuleiro possui casas claras e escuras personalizadas, tornando a interface mais agradável.
 
-🔧 Mudanças Técnicas Detalhadas:
+🔄 **Histórico de lances colorido: azul (Brancas) e vermelho (Pretas):**
+- Os lances são registrados com cores diferentes para cada lado, facilitando o acompanhamento da partida.
 
-Game.java:
-ChessGUI.java:
-📊 Estatísticas das Implementações:
-Funcionalidade	Tempo	Linhas Adicionadas	Complexidade
-Timer	20 min	~50 linhas	Média
-Cores Tabuleiro	2 min	~2 linhas	Baixa
-Histórico Colorido	15 min	~30 linhas	Média
-Desfazer Movimento	25 min	~60 linhas	Alta
-TOTAL	62 min	~142 linhas	Média
+♟️ Promoção de peões com escolha de peça.
 
-🎯 Resultado Final:
+⬅️ Desfazer movimentos.
 
-Antes: Jogo básico de xadrez
-Depois: Jogo completo com:
-⏰ Timer em tempo real
-�� Visual moderno (branco/cinza)
-🌈 Histórico colorido
-↩️ Desfazer movimento
-🎮 Interface profissional
+🆕 Novo jogo e reinício rápido.
+
+---
+
+## Tecnologias Utilizadas
+
+- Java 17+
+- Java Swing (GUI)
+- Lógica de xadrez implementada em classes próprias
+- Timer com javax.swing.Timer
+- IA baseada em Minimax com avaliação de posição
+- Controle de profundidade para IA
+
+## Estrutura do Projeto
+ChessGUI/
+├── resources/                     # Ícones das peças
+│   ├── bB.png  bK.png  bN.png
+│   ├── bP.png  bQ.png  bR.png
+│   ├── wB.png  wK.png  wN.png
+│   ├── wP.png  wQ.png  wR.png
+├── src/
+│   ├── controller/
+│   │   └── Game.java              # Lógica de regras e movimentação
+│   ├── model/
+│   │   ├── board/
+│   │   │   ├── Board.java
+│   │   │   ├── Move.java
+│   │   │   └── Position.java
+│   │   └── pieces/
+│   │       ├── Bishop.java
+│   │       ├── King.java
+│   │       ├── Knight.java
+│   │       ├── Pawn.java
+│   │       ├── Piece.java
+│   │       ├── Queen.java
+│   │       └── Rook.java
+│   └── view/
+│       └── ChessGUI.java          # Interface gráfica principal
+└── README.md
+
+## Como Executar
+
+Clone o projeto:
+
+git clone <URL_DO_REPOSITORIO>
+
+Compile os arquivos Java:
+
+javac -d bin src/**/*.java
+
+Execute o jogo:
+
+java -cp bin view.ChessGUI
+
+Certifique-se de que a pasta resources/ esteja no mesmo nível de execução para carregar os ícones das peças corretamente.
+
+## Uso
+
+- **Selecionar Peça:** clique na peça desejada.
+- **Movimento Legal:** quadrados verdes indicam movimentos possíveis.
+- **Último Lance:** quadrados amarelos.
+- **Peças Capturadas:** mostradas no painel lateral.
+- **Histórico de Lances:** cores azul (Brancas) e vermelho (Pretas).
+- **Promoção de Peão:** escolha entre Rainha, Torre, Bispo ou Cavalo ao chegar na última linha.
+- **IA Níveis:** ajuste a profundidade de decisão da IA de 1 a 4.
+- **Tempo do Jogador:** cronômetro individual, com destaque em vermelho para o jogador da vez.
+
+---
+
+Autor
+
+Gabriel Ozório Franco

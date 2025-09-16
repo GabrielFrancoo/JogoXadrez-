@@ -8,6 +8,7 @@ public class CapturedPiecesPanel extends JPanel {
     private final int ICON_SIZE = 32;
     private int nextIndex = 0;
 
+//===================PEÇAS CAPTURADAS NO MENU LATERAL=========================== 
     public CapturedPiecesPanel() {
         // 8 linhas, 2 colunas
         setLayout(new GridLayout(8, 2, 2, 2));
@@ -30,10 +31,10 @@ public class CapturedPiecesPanel extends JPanel {
         setMaximumSize(new Dimension(width, height));
         setMinimumSize(new Dimension(width, height));
     }
-
+//================= MÉTODO DE CAPTURA DE PEÇAS ====================
     public void addCapturedPiece(ImageIcon pieceIcon) {
         if(nextIndex >= 18) return;
-
+        
         int r = nextIndex / 2;
         int c = nextIndex % 2;
         Image img = pieceIcon.getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH);
