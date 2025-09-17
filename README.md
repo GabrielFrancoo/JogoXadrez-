@@ -38,53 +38,30 @@ ChessGUI é um jogo de xadrez desenvolvido em Java Swing, com inteligência arti
 
 - Java 17+
 - Java Swing (GUI)
-- Lógica de xadrez implementada em classes próprias
-- Timer com javax.swing.Timer
-- IA baseada em Minimax com avaliação de posição
-- Controle de profundidade para IA
 
 ## Estrutura do Projeto
+
 ChessGUI/
-├── resources/                     # Ícones das peças
-│   ├── bB.png  bK.png  bN.png
-│   ├── bP.png  bQ.png  bR.png
-│   ├── wB.png  wK.png  wN.png
-│   ├── wP.png  wQ.png  wR.png
-├── src/
-│   ├── controller/
-│   │   └── Game.java              # Lógica de regras e movimentação
-│   ├── model/
-│   │   ├── board/
-│   │   │   ├── Board.java
-│   │   │   ├── Move.java
-│   │   │   └── Position.java
-│   │   └── pieces/
-│   │       ├── Bishop.java
-│   │       ├── King.java
-│   │       ├── Knight.java
-│   │       ├── Pawn.java
-│   │       ├── Piece.java
-│   │       ├── Queen.java
-│   │       └── Rook.java
-│   └── view/
-│       └── ChessGUI.java          # Interface gráfica principal
-└── README.md
+├── .vscode/
+├── bin/ 
+│ ├── controller/ 
+│ ├── model/ 
+│ ├── view/ 
+│ └── resources/ 
+├── src/ 
+│ ├── controller/
+│ ├── model/
+│ └── view/
+└── README.md 
 
-## Como Executar
 
-Clone o projeto:
+## Como Compilar e Executar (Windows PowerShell)
 
-git clone <URL_DO_REPOSITORIO>
-
-Compile os arquivos Java:
-
-javac -d bin src/**/*.java
-
-Execute o jogo:
-
-java -cp bin view.ChessGUI
-
-Certifique-se de que a pasta resources/ esteja no mesmo nível de execução para carregar os ícones das peças corretamente.
+```powershell
+cd "CAMINHO/DO/PROJETO"   # entra na pasta do projeto
+mkdir bin                 # cria a pasta bin
+javac -encoding UTF-8 -d bin (Get-ChildItem -Recurse -Filter *.java | ForEach-Object { $_.FullName })   # compila os .java
+java -cp bin view.ChessGUI   # executa o jogo
 
 ## Uso
 

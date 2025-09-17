@@ -831,9 +831,11 @@ private int evaluateMove(Position from, Position to, int depth, boolean isWhiteT
         score = best;
     }
 
+
     game.undoLastMove(); // desfaz o movimento
     return score;
 }
+
         public static void main(String[] args) {
             SwingUtilities.invokeLater(ChessGUI::new);
         }
